@@ -1,6 +1,5 @@
 #include "main.h"
 #include "piston.hpp"
-#include "main.h"
 #include "EZ-Template/util.hpp"
 #include "autons.hpp"
 #include "display/lv_objx/lv_btnm.h"
