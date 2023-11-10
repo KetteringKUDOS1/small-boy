@@ -1,8 +1,8 @@
 #include "main.h"
-#include "piston.hpp"
 #include "EZ-Template/util.hpp"
 #include "autons.hpp"
-
+pros::ADIDigitalOut left_wing(1);
+pros::ADIDigitalOut right_wing(2);
 
 // Chassis constructor
 Drive chassis (
