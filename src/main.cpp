@@ -15,11 +15,11 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {-1, -11}
+  {4, 11}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{20, 10}
+  ,{-20, -10}
 
   // IMU Port
   ,15
@@ -64,8 +64,11 @@ Drive chassis (
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
+  left_wing.set_value(true);
+  right_wing.set_value(true);
   // Print our branding over your terminal :D
   ez::print_ez_template();
+  
   
   pros::delay(500); // Stop the user from doing anything while legacy ports configure.
 
