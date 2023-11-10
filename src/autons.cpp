@@ -1,6 +1,5 @@
 #include "main.h"
-
-
+#include "autons.hpp"
 /////
 // For instalattion, upgrading, documentations and tutorials, check out website!
 // https://ez-robotics.github.io/EZ-Template/
@@ -73,13 +72,10 @@ void drive_example() {
   // for slew, only enable it when the drive distance is greater then the slew distance + a few inches
 
 
-  chassis.set_drive_pid(24, DRIVE_SPEED, true);
+  chassis.set_drive_pid(60, DRIVE_SPEED, true);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(-12, DRIVE_SPEED);
-  chassis.wait_drive();
-
-  chassis.set_drive_pid(-12, DRIVE_SPEED);
+  chassis.set_swing_pid(ez::RIGHT_SWING, 90, SWING_SPEED);
   chassis.wait_drive();
 }
 
@@ -241,7 +237,6 @@ void interfered_example() {
  chassis.set_turn_pid(90, TURN_SPEED);
  chassis.wait_drive();
 }
-
 
 
 // . . .

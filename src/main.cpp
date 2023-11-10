@@ -2,13 +2,6 @@
 #include "piston.hpp"
 #include "EZ-Template/util.hpp"
 #include "autons.hpp"
-#include "display/lv_objx/lv_btnm.h"
-#include "display/lv_objx/lv_imgbtn.h"
-#include "pros/adi.h"
-#include "pros/misc.h"
-#include "pros/misc.hpp"
-#include "pros/rtos.hpp"
-#include <sys/types.h>
 
 
 // Chassis constructor
@@ -84,7 +77,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
-    Auton("Example Drive\n\nDrive forward and come back.", over_under_skills),
+    Auton("skills", over_under_skills),
   });
 
   // Initialize chassis and auton selector
