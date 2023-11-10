@@ -1,4 +1,15 @@
 #include "main.h"
+#include "piston.hpp"
+#include "main.h"
+#include "EZ-Template/util.hpp"
+#include "autons.hpp"
+#include "display/lv_objx/lv_btnm.h"
+#include "display/lv_objx/lv_imgbtn.h"
+#include "pros/adi.h"
+#include "pros/misc.h"
+#include "pros/misc.hpp"
+#include "pros/rtos.hpp"
+#include <sys/types.h>
 
 
 // Chassis constructor
@@ -163,6 +174,16 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
+
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+      left_wing.set_value(true);
+      right_wing.set_value(true);
+    }
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+     left_wing.set_value(false);
+      right_wing.set_value(false);
+    }
+ 
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
