@@ -77,7 +77,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
-    Auton("skills", over_under_skills),
+    Auton("skills", drive_example),
   });
 
   // Initialize chassis and auton selector
