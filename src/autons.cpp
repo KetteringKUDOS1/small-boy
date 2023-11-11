@@ -92,20 +92,23 @@ void drive_example() {
   left_wing.set_value(false);
   right_wing.set_value(false);
 
- chassis.set_drive_pid(-17, DRIVE_SPEED, true);
+pros::delay(500);
+ chassis.set_drive_pid(-22, 127, true);
   chassis.wait_drive();
 
 
-chassis.set_drive_pid(17, DRIVE_SPEED, true);
+chassis.set_drive_pid(30, DRIVE_SPEED, true);
   chassis.wait_drive();
 
   left_wing.set_value(true);
   right_wing.set_value(true);
 
+  pros::delay(500);
+
   chassis.set_turn_pid(90, TURN_SPEED);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(10, DRIVE_SPEED, true);
+  chassis.set_drive_pid(20, DRIVE_SPEED, true);
   chassis.wait_drive();
 
 
@@ -114,9 +117,13 @@ chassis.set_turn_pid(180, TURN_SPEED);
 
   left_wing.set_value(false);
   right_wing.set_value(false);
+  pros::delay(500);
 
+  chassis.set_drive_pid(-30, 127, true);
+  chassis.wait_drive();
 
-
+  chassis.set_drive_pid(20, DRIVE_SPEED, true);
+  chassis.wait_drive();
 }
 
 
