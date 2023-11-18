@@ -71,58 +71,42 @@ void drive_example() {
   // for slew, only enable it when the drive distance is greater then the slew distance + a few inches
 
 
-  chassis.set_drive_pid(70, DRIVE_SPEED, true);
+  chassis.set_drive_pid(80, 127, true);
   chassis.wait_drive();
 
-  chassis.set_swing_pid(ez::LEFT_SWING, 90, SWING_SPEED);
-  chassis.wait_drive();
+ pros::delay(45000);
 
-  chassis.set_drive_pid(17, DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-  chassis.set_turn_pid(115, TURN_SPEED);
-  chassis.wait_drive();
-
-  chassis.set_drive_pid(35, DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-   chassis.set_turn_pid(180, TURN_SPEED);
+  chassis.set_swing_pid(ez::RIGHT_SWING, -60, SWING_SPEED);
   chassis.wait_drive();
 
   left_wing.set_value(false);
-  right_wing.set_value(false);
 
-pros::delay(500);
- chassis.set_drive_pid(-22, 127, true);
-  chassis.wait_drive();
-
-
-chassis.set_drive_pid(30, DRIVE_SPEED, true);
-  chassis.wait_drive();
-
-  left_wing.set_value(true);
-  right_wing.set_value(true);
 
   pros::delay(500);
 
-  chassis.set_turn_pid(90, TURN_SPEED);
+  chassis.set_drive_pid(20, 137, true);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(20, DRIVE_SPEED, true);
+chassis.set_swing_pid(ez::LEFT_SWING, -90, SWING_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(10, 127, true);
   chassis.wait_drive();
 
 
-chassis.set_turn_pid(180, TURN_SPEED);
+  chassis.set_drive_pid(-10, 127, true);
   chassis.wait_drive();
 
-  left_wing.set_value(false);
-  right_wing.set_value(false);
-  pros::delay(500);
-
-  chassis.set_drive_pid(-30, 127, true);
+chassis.set_drive_pid(10, 127, true);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(20, DRIVE_SPEED, true);
+
+  chassis.set_drive_pid(-10, 127, true);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(10, 127, true);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-10, 127, true);
   chassis.wait_drive();
 }
 
