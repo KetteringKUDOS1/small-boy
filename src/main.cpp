@@ -1,34 +1,35 @@
 #include "main.h"
 #include "EZ-Template/util.hpp"
 #include "autons.hpp"
-#include "pistons.hpp"
-
+#include "pistons.cpp"
+#include "cata.cpp"
+#include "intake.hpp"
 // Chassis constructor
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {20, 10}
+  {2, -12,1,}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{-4, -11}
+  ,{-15, 16,13}
 
   // IMU Port
-  ,15
+  ,18
 
   // Wheel Diameter (Remember, 4" wheels are actually 4.125!)
   //    (or tracking wheel diameter)
-  ,4.125
+  ,3.25
 
   // Cartridge RPM
   //   (or tick per rotation if using tracking wheels)
-  ,200
+  ,600
 
   // External Gear Ratio (MUST BE DECIMAL)
   //    (or gear ratio of tracking wheel)
   // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be 2.333.
   // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 0.6.
-  ,1.0
+  ,1.6
 
 
   // Uncomment if using tracking wheels
@@ -153,8 +154,8 @@ void opcontrol() {
 
   while (true) {
 
-    chassis.tank(); // Tank control
-     //chassis.arcade_standard(ez::SPLIT); // Standard split arcade
+    //chassis.tank(); // Tank control
+     chassis.arcade_standard(ez::SPLIT); // Standard split arcade
     // chassis.arcade_standard(ez::SINGLE); // Standard single arcade
     // chassis.arcade_flipped(ez::SPLIT); // Flipped split arcade
     // chassis.arcade_flipped(ez::SINGLE); // Flipped single arcade
@@ -164,15 +165,20 @@ void opcontrol() {
     // . . .
 
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-      left_wing.set_value(true);
-      right_wing.set_value(true);
+      intakein(600);
     }
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-     left_wing.set_value(false);
-      right_wing.set_value(false);
+     intakeout(600);
     }
- 
+}
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) == 1 && cata_rot.get_angle() >= 5100){
+        cata_move(70);
+    }
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) == 0 && cata_rot.get_angle() <= 4650){
+        catastop();
+      
+    }
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
-}
+
