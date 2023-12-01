@@ -8,11 +8,11 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {2, -12,1,}
+  {15, -16,13}//15,-16,13
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{-15, 16,13}
+  ,{-2, 12,-1}//-2,12,-1
 
   // IMU Port
   ,18
@@ -170,15 +170,18 @@ void opcontrol() {
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
      intakeout(600);
     }
-}
-    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) == 1 && cata_rot.get_angle() >= 5100){
+    else {
+      intakestop();
+    }
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) == 1 && cata_rot.get_angle() <= 10000){
         cata_move(70);
     }
-    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) == 0 && cata_rot.get_angle() <= 4650){
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 0 && cata_rot.get_angle() >= 161000){
         catastop();
       
     }
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
+}
 

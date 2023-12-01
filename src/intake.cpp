@@ -2,15 +2,19 @@
 #include "pros/motors.hpp"
 #include "pros/rotation.h"
 #include "pros/rotation.hpp"
-#include "cata.hpp"
+#include "intake.hpp"
 
-pros::Motor intake(18, pros::E_MOTOR_GEARSET_36, true);
+pros::Motor intake(20, pros::E_MOTOR_GEARSET_06, true);
 
 
 void intakein(int speed){
-    intake.move_velocity(speed);
+    intake.move_velocity(-speed);
 }
 
 void intakeout(int speed){
-    intake.move_velocity(-speed);
+    intake.move_velocity(speed);
+}
+
+void intakestop(){
+    intake.move_velocity(0);
 }

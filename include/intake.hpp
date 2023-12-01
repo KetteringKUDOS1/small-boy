@@ -4,3 +4,4 @@
 
 extern void intakein(int speed);
 extern void intakeout(int speed);
+extern void intakestop();
