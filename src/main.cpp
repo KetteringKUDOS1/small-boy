@@ -8,11 +8,11 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {15, -16,13}//15,-16,13
+  {-2, 12,-1}//15,-16,13
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{-2, 12,-1}//-2,12,-1
+  ,{15, -16,13}//-2,12,-1
 
   // IMU Port
   ,18
@@ -57,8 +57,7 @@ Drive chassis (
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-  left_wing.set_value(true);
-  right_wing.set_value(true);
+  wings.set_value(true);
   // Print our branding over your terminal :D
   ez::print_ez_template();
   
@@ -68,7 +67,7 @@ void initialize() {
   // Configure your chassis controls
   chassis.toggle_modify_curve_with_controller(true); // Enables modifying the controller curve with buttons on the joysticks
   chassis.set_active_brake(0); // Sets the active brake kP. We recommend 0.1.
-  chassis.set_curve_default(0, 0); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
+  chassis.set_curve_default(0.15, 1.5); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
   default_constants(); // Set the drive to your own constants from autons.cpp!
 
   // These are already defaulted to these buttons, but you can change the left/right curve buttons here!
@@ -77,7 +76,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
-    //Auton("skills", drive_example),
+    Auton("skills", awp),
   });
 
   // Initialize chassis and auton selector
@@ -173,14 +172,24 @@ void opcontrol() {
     else {
       intakestop();
     }
-    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) == 1 && cata_rot.get_angle() <= 10000){
-        cata_move(70);
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)==1){
+        cata_move(60);
     }
-    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 0 && cata_rot.get_angle() >= 161000){
+    else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 1 && cata_rot.get_angle() <= 6900){
+      cata_move(60);
+    }
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 0 && cata_rot.get_angle() >= 7800){
         catastop();
       
     }
 
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)){
+      intake.set_value(true);
+    }
+
+  else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){
+    intake.set_value(false);
+  }
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
 }

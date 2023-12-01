@@ -1,5 +1,5 @@
 #include "pistons.hpp"
 
 // define the variable here
-pros::ADIDigitalOut left_wing(1);
-pros::ADIDigitalOut right_wing(2);
+pros::ADIDigitalOut wings(2);
+pros::ADIDigitalOut intake(1);

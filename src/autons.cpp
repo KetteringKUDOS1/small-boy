@@ -1,11 +1,13 @@
 #include "main.h"
 #include "autons.hpp"
+#include "intake.hpp"
+#include "cata.hpp"
 /////
 // For instalattion, upgrading, documentations and tutorials, check out website!
 // https://ez-robotics.github.io/EZ-Template/
 /////
 
-const int DRIVE_SPEED = 110; // This is 110/127 (around 87% of max speed).  We don't suggest making this 127.
+const int DRIVE_SPEED = 90; // This is 110/127 (around 87% of max speed).  We don't suggest making this 127.
                              // If this is 127 and the robot tries to heading correct, it's only correcting by
                              // making one side slower.  When this is 87%, it's correcting by making one side
                              // faster and one side slower, giving better heading correction.
@@ -79,7 +81,7 @@ void drive_example() {
   chassis.set_swing_pid(ez::RIGHT_SWING, -60, SWING_SPEED);
   chassis.wait_drive();
 
-  left_wing.set_value(false);
+  wings.set_value(false);
 
 
   pros::delay(500);
@@ -273,3 +275,70 @@ void interfered_example() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
+
+void awp(){
+  chassis.set_drive_pid(-70, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(-45, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(-20, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(-135, TURN_SPEED);
+  chassis.wait_drive();
+
+  intakein(600);
+
+  chassis.set_drive_pid(15, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  pros::delay(500);
+
+  chassis.set_drive_pid(-8,50,true);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(115, 60);
+  chassis.wait_drive();
+pros::delay(500);
+  intakeout(300);
+  chassis.set_drive_pid(-15, 127, true);
+  chassis.wait_drive();
+
+  wings.set_value(true);
+
+  chassis.set_drive_pid(35, 127, true);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(-10, 127, true);
+  chassis.wait_drive();
+
+  wings.set_value(false);
+
+pros::delay(500);
+
+  chassis.set_turn_pid(-90, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(-20, 127, true);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(20, 127, true);
+  chassis.wait_drive();
+
+chassis.set_turn_pid(-180, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(225, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(-35, 127, true);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(-45, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(50, 127, true);
+  chassis.wait_drive();
+}
