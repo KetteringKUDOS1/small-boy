@@ -57,7 +57,6 @@ Drive chassis (
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-  wings.set_value(true);
   // Print our branding over your terminal :D
   ez::print_ez_template();
   
@@ -76,7 +75,8 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
-    Auton("skills", awp),
+    Auton("awp", awp),
+    Auton("if this doesnt work imma cry", skills),
   });
 
   // Initialize chassis and auton selector
@@ -173,12 +173,12 @@ void opcontrol() {
       intakestop();
     }
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)==1){
-        cata_move(60);
+        cata_move(100);
     }
     else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 1 && cata_rot.get_angle() <= 6900){
       cata_move(60);
     }
-    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 0 && cata_rot.get_angle() >= 7800){
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 0 && cata_rot.get_angle() >= 7000){
         catastop();
       
     }
@@ -189,6 +189,14 @@ void opcontrol() {
 
   else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){
     intake.set_value(false);
+  }
+
+  if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)){
+      wings.set_value(true);
+    }
+
+  else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
+    wings.set_value(false);
   }
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
