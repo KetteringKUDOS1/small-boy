@@ -277,7 +277,9 @@ void interfered_example() {
 // . . .
 
 void awp(){
-  chassis.set_drive_pid(-70, DRIVE_SPEED, true);
+
+  intake.set_value(true);
+  chassis.set_drive_pid(-70, 127, true);
   chassis.wait_drive();
 
   chassis.set_turn_pid(-45, TURN_SPEED);
@@ -294,51 +296,42 @@ void awp(){
   chassis.set_drive_pid(15, DRIVE_SPEED, true);
   chassis.wait_drive();
 
-  pros::delay(500);
+  pros::delay(250);
 
-  chassis.set_drive_pid(-8,50,true);
+  chassis.set_drive_pid(-60,50,true);
   chassis.wait_drive();
 
-  chassis.set_turn_pid(115, 60);
-  chassis.wait_drive();
-pros::delay(500);
-  intakeout(300);
-  chassis.set_drive_pid(-15, 127, true);
+  chassis.set_turn_pid(180, 60);
   chassis.wait_drive();
 
-  wings.set_value(true);
+  intake.set_value(false);
 
-  chassis.set_drive_pid(35, 127, true);
+  intakeout(600);
+
+  chassis.set_drive_pid(10,50,true);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(-10, 127, true);
+  chassis.set_drive_pid(-10,50,true);
+  chassis.wait_drive();
+  
+  chassis.set_turn_pid(0, 60);
   chassis.wait_drive();
 
-  wings.set_value(false);
-
-pros::delay(500);
-
-  chassis.set_turn_pid(-90, TURN_SPEED);
+  chassis.set_drive_pid(-40,127,true);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(-20, 127, true);
+  intake.set_value(true);
+
+  chassis.set_drive_pid(10,50,true);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(20, 127, true);
+  chassis.set_turn_pid(-45, 60);
   chassis.wait_drive();
 
-chassis.set_turn_pid(-180, TURN_SPEED);
+  intakestop();
+
+  chassis.set_drive_pid(50,60,true);
   chassis.wait_drive();
 
-  chassis.set_turn_pid(225, TURN_SPEED);
-  chassis.wait_drive();
-
-  chassis.set_drive_pid(-35, 127, true);
-  chassis.wait_drive();
-
-  chassis.set_turn_pid(-45, TURN_SPEED);
-  chassis.wait_drive();
-
-  chassis.set_drive_pid(50, 127, true);
-  chassis.wait_drive();
 }
+

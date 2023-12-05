@@ -76,10 +76,10 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
     Auton("awp", awp),
-    Auton("if this doesnt work imma cry", skills),
   });
 
   // Initialize chassis and auton selector
+
   chassis.initialize();
   ez::as::initialize();
 }
@@ -164,12 +164,16 @@ void opcontrol() {
     // . . .
 
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+      intake.set_value(true);
       intakein(600);
+
     }
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+      intake.set_value(true);
      intakeout(600);
     }
     else {
+      intake.set_value(false);
       intakestop();
     }
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)==1){
@@ -178,7 +182,7 @@ void opcontrol() {
     else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 1 && cata_rot.get_angle() <= 6900){
       cata_move(60);
     }
-    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 0 && cata_rot.get_angle() >= 7000){
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 0 && cata_rot.get_angle() >= 6900){
         catastop();
       
     }
