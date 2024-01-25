@@ -4,7 +4,7 @@
 #include "pros/rotation.hpp"
 #include "intake.hpp"
 
-pros::Motor intake_motor(20, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor intake_motor(1, pros::E_MOTOR_GEARSET_06, true);
 
 
 void intakein(int speed){

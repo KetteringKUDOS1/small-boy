@@ -4,6 +4,8 @@
 #include "pistons.cpp"
 #include "intake.hpp"
 #include "flywheel.cpp"
+#include "pros/misc.h"
+#include "pros/rtos.hpp"
 
 //#include "cata.cpp"
 // Chassis constructor
@@ -172,38 +174,43 @@ void opcontrol() {
     }
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
       intake.set_value(true);
-     intakeout(600);
+      intakeout(600);
     }
     else {
       intake.set_value(false);
       intakestop();
     }
-    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)==1){
-        cata_move(100);
-    }
-    else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 1 && cata_rot.get_angle() <= 6900){
-      cata_move(60);
-    }
-    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) == 0 && cata_rot.get_angle() >= 6900){
-        catastop();
-      
-    }
+
 
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)){
       intake.set_value(true);
     }
 
-  else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){
     intake.set_value(false);
-  }
-
-  if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)){
-      wings.set_value(true);
     }
 
-  else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
-    wings.set_value(false);
-  }
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
+      start_wheel();
+    }
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
+      flywheel.brake();
+    }
+
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
+      start_wheel();
+      intake.set_value(true);
+      intakein(600);
+      while(true){
+        pros::delay(300);
+        intake.set_value(false);
+        if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
+          break;
+        }
+      }
+
+    }
+
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
 }
