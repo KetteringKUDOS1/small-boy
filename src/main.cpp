@@ -12,11 +12,11 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {-11, 20, -16}
+  {11, -20, -16}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{17, -14, 12}
+  ,{-17, 14, 12}
 
   // IMU Port
   ,19
@@ -69,8 +69,8 @@ void initialize() {
 
   // Configure your chassis controls
   chassis.toggle_modify_curve_with_controller(true); // Enables modifying the controller curve with buttons on the joysticks
-  chassis.set_active_brake(0); // Sets the active brake kP. We recommend 0.1.
-  chassis.set_curve_default(0.15, 1.5); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
+  chassis.set_active_brake(0.0); // Sets the active brake kP. We recommend 0.1.
+  chassis.set_curve_default(0.15, 2.5); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
   default_constants(); // Set the drive to your own constants from autons.cpp!
 
   // These are already defaulted to these buttons, but you can change the left/right curve buttons here!
@@ -79,7 +79,8 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
-    Auton("awp", awp),
+    Auton("awp2", awp2),
+    
   });
 
   // Initialize chassis and auton selector
@@ -157,9 +158,9 @@ void opcontrol() {
 
   while (true) {
 
-    chassis.tank(); // Tank control
-    //chassis.arcade_standard(ez::SPLIT); // Standard split arcade
-    // chassis.arcade_standard(ez::SINGLE); // Standard single arcade
+    //chassis.tank(); // Tank control
+    chassis.arcade_standard(ez::SPLIT); // Standard split arcade
+    //chassis.arcade_standard(ez::SINGLE); // Standard single arcade
     // chassis.arcade_flipped(ez::SPLIT); // Flipped split arcade
     // chassis.arcade_flipped(ez::SINGLE); // Flipped single arcade
 
@@ -202,9 +203,14 @@ void opcontrol() {
       intake.set_value(true);
       intakein(600);
       while(true){
-        pros::delay(300);
+        intake.set_value(true);
+        pros::delay(600);
         intake.set_value(false);
+        pros::delay(600);
+        master.rumble("-  .  -");
+
         if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
+          flywheel.brake();
           break;
         }
       }

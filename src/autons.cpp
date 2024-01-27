@@ -335,3 +335,52 @@ void awp(){
 
 }
 
+void awp2(){
+  intake.set_value(true);
+  intakein(600);
+  pros::delay(700);
+  intakestop();
+  chassis.set_drive_pid(-5, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(93, TURN_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(12, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(120, TURN_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(9, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  intakeout(600);
+  pros::delay(1000);
+  intakestop();
+  intake.set_value(false);
+  pros::delay(1000);
+  chassis.set_turn_pid(-60, TURN_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-10, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(-50, TURN_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-4, DRIVE_SPEED+25);
+  chassis.wait_drive();
+  chassis.set_drive_pid(4, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-4, DRIVE_SPEED+25);
+  chassis.wait_drive();
+  chassis.set_drive_pid(8, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_turn_pid(-90, TURN_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(28, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(-130, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(24, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_drive_pid(10, 20, true);
+  chassis.wait_drive();
+}
+
+

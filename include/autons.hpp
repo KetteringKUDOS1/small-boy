@@ -17,4 +17,5 @@ void one_mogo_constants();
 void two_mogo_constants();
 
 void awp();
+void awp2();
 void skills();
