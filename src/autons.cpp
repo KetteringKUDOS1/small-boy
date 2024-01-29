@@ -2,6 +2,7 @@
 #include "autons.hpp"
 #include "intake.hpp"
 #include "cata.hpp"
+#include "flywheel.hpp"
 /////
 // For instalattion, upgrading, documentations and tutorials, check out website!
 // https://ez-robotics.github.io/EZ-Template/
@@ -361,13 +362,13 @@ void awp2(){
   chassis.wait_drive();
   chassis.set_turn_pid(-50, TURN_SPEED);
   chassis.wait_drive();
-  chassis.set_drive_pid(-4, DRIVE_SPEED+25);
+  chassis.set_drive_pid(-5, DRIVE_SPEED+25);
   chassis.wait_drive();
-  chassis.set_drive_pid(4, DRIVE_SPEED);
+  chassis.set_drive_pid(5, DRIVE_SPEED);
   chassis.wait_drive();
-  chassis.set_drive_pid(-4, DRIVE_SPEED+25);
+  chassis.set_drive_pid(-5, DRIVE_SPEED+25);
   chassis.wait_drive();
-  chassis.set_drive_pid(8, DRIVE_SPEED);
+  chassis.set_drive_pid(10, DRIVE_SPEED);
   chassis.wait_drive();
   chassis.set_turn_pid(-90, TURN_SPEED);
   chassis.wait_drive();
@@ -382,5 +383,64 @@ void awp2(){
   chassis.set_drive_pid(10, 20, true);
   chassis.wait_drive();
 }
+
+void skills(){
+        start_wheel();
+      intake.set_value(true);
+      intakein(600);
+   for(int i=0; i<23;i++){
+        intake.set_value(true);
+        pros::delay(800);
+        intake.set_value(false);
+        pros::delay(800);
+        master.rumble("-  .  -");
+    }
+    chassis.set_drive_pid(-48, DRIVE_SPEED, true);
+    chassis.wait_drive();
+    chassis.set_turn_pid(45, TURN_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-15, DRIVE_SPEED+30, true);
+  chassis.wait_drive();
+  chassis.set_drive_pid(14, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-18, DRIVE_SPEED+30, true);
+  chassis.wait_drive();
+
+  for (int i = 0; i < 6; i++){
+    chassis.set_turn_pid(90, TURN_SPEED);
+    chassis.wait_drive();
+    chassis.set_drive_pid(15, DRIVE_SPEED, true);
+    chassis.wait_drive();
+    chassis.set_turn_pid(45, TURN_SPEED);
+    chassis.wait_drive();
+    chassis.set_drive_pid(-22, DRIVE_SPEED, true);
+    chassis.wait_drive();
+    chassis.set_drive_pid(15, DRIVE_SPEED, true);
+    chassis.wait_drive();
+    chassis.set_drive_pid(-22, DRIVE_SPEED, true);
+    chassis.wait_drive();
+    chassis.set_drive_pid(15, DRIVE_SPEED, true);
+    chassis.wait_drive();
+  }
+
+      chassis.set_turn_pid(90, TURN_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(14, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(45, TURN_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-20, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_drive_pid(15, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-20, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_drive_pid(15, DRIVE_SPEED, true);
+  chassis.wait_drive();
+
+  
+
+}
+
 
 

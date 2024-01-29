@@ -79,7 +79,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
-    Auton("awp2", awp2),
+    Auton("awp2", skills),
     
   });
 
@@ -204,9 +204,9 @@ void opcontrol() {
       intakein(600);
       while(true){
         intake.set_value(true);
-        pros::delay(600);
+        pros::delay(800);
         intake.set_value(false);
-        pros::delay(600);
+        pros::delay(800);
         master.rumble("-  .  -");
 
         if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
