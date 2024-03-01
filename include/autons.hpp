@@ -19,3 +19,4 @@ void two_mogo_constants();
 void awp();
 void awp2();
 void skills();
+void state_skills();

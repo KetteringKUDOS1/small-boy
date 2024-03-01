@@ -12,11 +12,11 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {11, -20, -16}
+  {-20, -16}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{-17, 14, 12}
+  ,{14, 12}
 
   // IMU Port
   ,19
@@ -79,6 +79,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
+    Auton("skills", state_skills),
     Auton("awp2", skills),
     
   });

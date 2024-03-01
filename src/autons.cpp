@@ -441,6 +441,73 @@ void skills(){
   
 
 }
+void state_skills(){
+  int DRIVE_SPEED = 70;
+  start_wheel();
+  pros::delay(1000);
+  intake.set_value(true);
+  intakein(600);
+
+  for(int i=0; i<22; i++){
+    
+    intake.set_value(true);
+    pros::delay(600);
+    intake.set_value(false);
+    pros::delay(600);
+    master.rumble("-  .  -");
+
+  }
+  intakestop();
+  stop_wheel();
+
+  // Scoring alliance balls
+  chassis.set_turn_pid(-95, TURN_SPEED);
+  chassis.wait_drive();
+  pros::delay(200);
+  chassis.set_drive_pid(-28, DRIVE_SPEED);
+  chassis.wait_drive();
+  pros::delay(200);
+  chassis.set_turn_pid(-50, TURN_SPEED);
+  chassis.wait_drive();
+  pros::delay(200);
+  chassis.set_drive_pid(-10, DRIVE_SPEED);
+  chassis.wait_drive();
+  pros::delay(200);
+  chassis.set_drive_pid(4, DRIVE_SPEED);
+  chassis.wait_drive();
+  pros::delay(200);
+  chassis.set_drive_pid(-10, DRIVE_SPEED);
+  chassis.wait_drive();
+  pros::delay(200);
+  chassis.set_drive_pid(9, DRIVE_SPEED);
+  chassis.wait_drive();
+  //Start pushing
+  DRIVE_SPEED = 90;
+
+  chassis.set_turn_pid(45, TURN_SPEED);
+    chassis.wait_drive();
+  
+    chassis.set_drive_pid(-44, DRIVE_SPEED);
+  chassis.wait_drive();
+
+  for(int i=0; i<10; i++){
+    
+    chassis.set_drive_pid(-17, DRIVE_SPEED);
+    chassis.wait_drive();
+    chassis.set_drive_pid(14, DRIVE_SPEED);
+    chassis.wait_drive();
+    chassis.set_drive_pid(-17, DRIVE_SPEED);
+    chassis.wait_drive();
+    chassis.set_drive_pid(14, DRIVE_SPEED);
+    chassis.wait_drive();
+    chassis.set_turn_pid(-45, TURN_SPEED);
+    chassis.wait_drive();
+    chassis.set_drive_pid(-10, DRIVE_SPEED);
+    chassis.wait_drive();
+    chassis.set_turn_pid(45, TURN_SPEED);
+    chassis.wait_drive();
+}
+}
 
 
 
